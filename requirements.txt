@@ -1,0 +1,14 @@
+# Requirements for C2M (CAN to MQTT) scripts
+# Install with: pip install -r requirements.txt
+
+# CAN bus communication
+python-can>=4.0.0
+
+# MQTT communication
+paho-mqtt>=2.0.0
+
+# DBC file parsing (for c2m_generator.py)
+cantools>=39.0.0
+
+# YAML configuration parsing (for c2m_config_parser.py)
+PyYAML>=6.0

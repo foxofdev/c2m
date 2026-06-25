@@ -1,0 +1,62 @@
+# =====================================================================
+# can2mqtt configuration
+# =====================================================================
+
+# -------------------------------------------------
+# CAN setup
+# -------------------------------------------------
+can:
+  bus: vcan0
+  tx_is_cyclic: true
+  message_tx_cycle_default_s: 0.5
+  message_tx_timeout_default_s: 0.1
+  message_rx_timeout_default_s: 5
+  rx_is_cyclic: false
+  message_rx_cycle_default_s: 0.5
+
+# -------------------------------------------------
+# MQTT setup
+# -------------------------------------------------
+mqtt:
+  base_topic: c2m_basic_example
+  qos_default: 0
+  retain_default: true
+  tx_is_cyclic: true
+  rx_is_cyclic: false
+  signal_tx_cycle_s: 0.25
+  signal_timeout_s: 5
+  check_incoming_signal_name: false
+  signal_name_in_payload: false
+
+# -------------------------------------------------
+# Signals
+# -------------------------------------------------
+signals:
+  - name: fromCan
+    device: gateway
+    init_value: 0x7
+    can_id: 0x123
+    can_msg_offset: 0
+    can_bit_length: 1
+    can_byteorder: little
+    can_scaling: 1
+    can_offset: 0
+    is_signed: false
+    mqtt_topic: "fromCan"
+    source: CAN
+    vtable:
+      0x1: Value1
+      0x0: Value0
+
+  - name: fromMqtt
+    device: gateway
+    init_value: 0x0
+    can_id: 0x456
+    can_msg_offset: 3
+    can_bit_length: 1
+    can_byteorder: little
+    can_scaling: 1
+    can_offset: 0
+    is_signed: true
+    mqtt_topic: "fromMqtt"
+    source: MQTT
