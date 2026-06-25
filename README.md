@@ -38,11 +38,11 @@ time) are mandatory; `name`, `unit` and `value_name` are optional:
 ## How it fits together
 
 ```
-CAN bus  <──>  C2mCanBridge  ┐
-                             ├──  C2mSignalRegistry  (C2mSignal objects)
-MQTT broker  <──>  C2mMqttBridge  ┘
-                             ▲
-                  C2mConfigParser (c2m_config.yaml)
+CAN bus     <----->  C2mCanBridge  ┐
+                                   |──  C2mSignalRegistry  (C2mSignal objects)
+MQTT broker <----->  C2mMqttBridge ┘
+                           ▲
+                     C2mConfigParser (c2m_config.yaml)
 ```
 
 The config parser builds a registry of `C2mSignal` objects; the two bridges
@@ -61,8 +61,9 @@ can2mqtt/
 ├── c2m_status.py           C2mStatusReporter: service status (starting/running/stopped) over MQTT
 ├── c2m_logging.py          Logging setup + exit-reason handlers
 ├── requirements.txt        Python dependencies (python-can, paho-mqtt, cantools, PyYAML)
-│
-├── helpers/                DBC → YAML config generator (c2m_dbc_to_config.py)
+├── helpers/                 
+│   ├── c2m_dbc_to_config.py Script to convert a DBC file into c2m config
+│   └── README.md           Documentation for the DBC to config script
 └── examples/
     └── basic/              A basic example of how to use c2m
         ├── c2m_config.yaml The basic example configuration
